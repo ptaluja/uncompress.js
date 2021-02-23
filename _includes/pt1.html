@@ -69,14 +69,11 @@
     };
     reader.readAsDataURL(input.files[0]);
     //download button
-    var download = document.getElementById("download");
-    download.innerHTML = "<a id='hello'>download image</a>";
     var hello = document.getElementById("hello");
     canvas.toBlob(
       function (blob) {
         var ans = window.URL.createObjectURL(blob);
-        hello.setAttribute("download", "ans");
-        hello.setAttribute("href", ans);
+        saveAs(ans, "converted");
       },
       "image/webp",
       0.95
