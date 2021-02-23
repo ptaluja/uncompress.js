@@ -1,85 +1,90 @@
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.js"
-  integrity="sha512-UNbeFrHORGTzMn3HTt00fvdojBYHLPxJbLChmtoyDwB6P9hX5mah3kMKm0HHNx/EvSPJt14b+SlD8xhuZ4w9Lg=="
-  crossorigin="anonymous"
-></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js" integrity="sha512-jzL0FvPiDtXef2o2XZJWgaEpVAihqquZT/tT89qCVaxVuHwJ/1DFcJ+8TBMXplSJXE8gLbVAUv+Lj20qHpGx+A==" crossorigin="anonymous"></script>
 <script>
-  var canvas = document.getElementById("canvas");
-  var ctx = canvas.getContext("2d");
-  var input = document.getElementById("input");
-  var height;
-  var width;
-
-  //setting image resolution
-
-  /* function resolution() {
-          var height = document.getElementById("height").value;
-          var width = document.getElementById("width").value;
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          var reader = new FileReader();
-          reader.onload = function(event) {
-              var image = new Image(width, height);
-              image.onload = function() {
-                  canvas.width = image.width;
-                  canvas.height = image.height;
-                  ctx.drawImage(image, 0, 0, width, height);
-              }
-              image.src = event.target.result;
-          }
-          reader.readAsDataURL(input.files[0]);
-          alert("resolution set");
-      }
-  */
-  //setting resolution
-
-  function resolution() {
-    if (input.files.length == 0) {
-      alert("please enter the file first");
-    } else {
-      height = document.getElementById("height").value;
-      width = document.getElementById("width").value;
-      alert("resolution set");
-    }
-  }
-
-  //displaying image into canvas
-
-  function convert(event) {
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext('2d');
+    var input = document.getElementById("input");
+    var height;
+    var width;
     console.log(height);
-    console.log(width);
-    var reader = new FileReader();
-    reader.onload = function (event) {
-      if (height == undefined && width == undefined) {
-        var image = new Image();
-        image.onload = function () {
-          canvas.width = image.width;
-          canvas.height = image.height;
-          ctx.drawImage(image, 0, 0);
-        };
-        image.src = event.target.result;
-      } else {
-        var image = new Image(width, height);
-        image.onload = function () {
-          canvas.width = image.width;
-          canvas.height = image.height;
-          ctx.drawImage(image, 0, 0, width, height);
-        };
-        image.src = event.target.result;
-      }
-    };
-    reader.readAsDataURL(input.files[0]);
-    //download button
-    var hello = document.getElementById("hello");
-    canvas.toBlob(
-      function (blob) {
-        var ans = window.URL.createObjectURL(blob);
-        saveAs(ans, "converted");
-      },
-      "image/webp",
-      0.95
-    );
-    alert("conversion done.Click download");
-  }
 
-  //downoading image
+
+    //setting image resolution
+
+    /* function resolution() {
+        var height = document.getElementById("height").value;
+        var width = document.getElementById("width").value;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            var image = new Image(width, height);
+            image.onload = function() {
+                canvas.width = image.width;
+                canvas.height = image.height;
+                ctx.drawImage(image, 0, 0, width, height);
+            }
+            image.src = event.target.result;
+        }
+        reader.readAsDataURL(input.files[0]);
+        alert("resolution set");
+    }
+*/
+    //setting resolution
+
+    function resolution() {
+        if (input.files.length == 0) {
+            alert("please enter the file first");
+        } else {
+            height = document.getElementById("height").value;
+            width = document.getElementById("width").value;
+            alert("resolution set");
+        }
+    }
+
+
+
+
+    //displaying image into canvas
+
+    function convert(event) {
+        console.log(height);
+        console.log(width);
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            if (height == undefined && width == undefined) {
+                var image = new Image();
+                image.onload = function() {
+                    canvas.width = image.width;
+                    canvas.height = image.height;
+                    ctx.drawImage(image, 0, 0);
+                }
+                image.src = event.target.result;
+            } else {
+                var image = new Image(width, height);
+                image.onload = function() {
+                    canvas.width = image.width;
+                    canvas.height = image.height;
+                    ctx.drawImage(image, 0, 0, width, height);
+                }
+                image.src = event.target.result;
+            }
+        }
+        reader.readAsDataURL(input.files[0]);
+        //download button
+        var download = document.getElementById("download");
+        download.innerHTML = "<a id='hello'>download image</a>";
+        var hello = document.getElementById("hello");
+        canvas.toBlob(function(blob) {
+            var ans = window.URL.createObjectURL(blob);
+            hello.setAttribute("download", "ans");
+            hello.setAttribute("href", ans);
+
+        }, 'image/webp', 0.95);
+        alert("conversion done.Click download");
+    }
+
+
+
+
+    //downoading image
 </script>
