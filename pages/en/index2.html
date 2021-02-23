@@ -5,22 +5,21 @@ fileName: en
 permalink: /jpgtowebp
 ---
 
-<link rel="stylesheet" href="css/index2.css" />
-<div class="container">
-  <div class="row">
-    <div class="col col-md-12 col-sm-12 col-lg-12">
-      <input type="file" id="input" class="form-control" /><br />
-      <input type="text" id="height" placeholder="enter the height" />
-      <input type="text" id="width" placeholder="enter the width" />
-      <br /><br />
-      <button class="btn btn-danger" id="resolution" onclick="resolution()">
-        Set Resolution
-      </button>
-      <button class="btn btn-danger" id="b" onclick="convert()">Convert</button>
-      <br />
-      <canvas id="canvas"></canvas>
-      <span id="download"></span>
-    </div>
-  </div>
-</div>
+<h1>jpg/jpeg/png to webp</h1>
+
+<input type="file" accept="image/*" id="input" onchange="convert()" /><br />
+<p>ENTER THE DIMENSIONS</p>
+<input type="text" id="width" />X<input type="text" id="height" /><button
+  onclick="resolution()"
+>
+  change resolution
+</button>
+<br />
+<br />
+<br />
+
+<button onclick="convert()">convert</button>
+<span id="download"></span>
+<canvas id="canvas" height="1" width="1"> </canvas>
+
 {% include pt1.html %}
