@@ -48,6 +48,5 @@
   height: auto;
 }
 #canvas {
-  height: 1px;
-  width: 1px;
+  margin:auto;
 }
